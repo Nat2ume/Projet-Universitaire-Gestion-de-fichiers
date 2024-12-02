@@ -2,7 +2,7 @@ from json import loads
 from csv import DictWriter
 from bs4 import BeautifulSoup
 
-def remove_html_tags(texte : str) -> str:
+def enleveTagsHtml(texte : str) -> str:
     '''
     Objectif
     ----------
@@ -66,24 +66,26 @@ def dateVersDateEtHeures(dateHeures : str) -> tuple():
     elif heure[8] == "-":
         heure = str(int(heure[:2]) - int(heure[9:11]) - 1) + heure[2:8]
 
-    # Ajout du try pour évité une erreur qui arrive quand on fait le test "elif" avec une heure qui a qu'un seul chiffre
-    try:
-        # Modification si l'heure devient négative 
-        if heure[0] == "-":
-            # Changement de l'heure pour compter a partir de 24h pour soustraire
-            heure = str(24 - int(heure[1])) + heure[2:]
-            # Baisse de 1 jour
-            date = str(int(date[:2])-1) + date[2:]
+    # Séparateur pour les heures
+    point = heure.find(":")
+    
+    # Modification si l'heure devient négative 
+    if heure[0] == "-":
+        # Changement de l'heure pour compter a partir de 24h pour soustraire
+        heure = str(24 - int(heure[:point])) + heure[2:]
+        # Baisse de 1 jour
+        date = str(int(date[:2])-1) + date[2:]
+    
+    
+    # Modification si l'heure dépace 23:59:59 
+    elif int(heure[:point]) > 23:
+        # Changement de l'heure pour soustraire 24h a une heure trop élevé
+        heure = str(int(heure[:point]) - 24) + heure[2:]
+        # Rajout de 1 jour a la date
+        date = str(int(date[:2])+1) + date[2:]
             
-        # Modification si l'heure dépace 23:59:59 
-        elif int(heure[:2]) > 23:
-            # Changement de l'heure pour soustraire 24h a une heure trop élevé
-            heure = str(int(heure[:2]) - 24) + heure[2:]
-            # Rajout de 1 jour a la date
-            date = str(int(date[:2])+1) + date[2:]
-            
-    finally:
-        return date,heure
+
+    return date,heure
     
 
 if __name__ == "__main__":   
@@ -114,7 +116,7 @@ if __name__ == "__main__":
                 if dico[cle] is not None:
                     # Modification pour les clés description et price_detail et enlever les trace HTML
                     if cle == "description" or cle == "price_detail":
-                        dico[cle] = remove_html_tags(dico[cle])
+                        dico[cle] = enleveTagsHtml(dico[cle])
 
                     # Modification des valeurs pour les clés afin d'avoir date et heure séparé 
                     if cle == "date_start":
@@ -131,7 +133,7 @@ if __name__ == "__main__":
             liste[i] = {cle: liste[i][cle] for cle in listeOrdonnee}
         
         # Ouverture ou création de fichier csv au nom voulu en écriture au format text avec l'encodage utf-8
-        fichier = open("que-faire-a-paris.csv", "wt",encoding='utf-8') 
+        fichier = open("que-faire-a-paris.csv", "wt",encoding='utf-8',newline="" ) 
         
         # Ajout de toutes les clés pour former la premiere ligne du fichier CSV
         ecritCSV = DictWriter(fichier,delimiter=";",fieldnames=liste[0].keys())
