@@ -12,7 +12,7 @@ def enleveTagsHtml(texte : str) -> str:
 
     Returns
     -------
-    str , Texte renvoyer sans aucune trace de HTML
+    str , Texte renvoyé sans aucune trace de HTML
     
     Exemple d'appel
     ----------
@@ -30,7 +30,7 @@ def estBissextile(annee : int) -> bool:
 
     Parameters
     ----------
-    annee : int , une année que l'on veut savoir si elle est bissextille
+    annee : int , une année dont on veut savoir si elle est bissextille
 
     Returns
     -------
@@ -53,7 +53,7 @@ def dateVersDateEtHeures(dateHeures : str) -> tuple():
     '''
     Objectif
     ---------- 
-    Fonction permettant de convertir une unique chaine de caractère avec date et heure au format "AAAA-MM-JJTHH:MM:SS+0n:00" en un tuple (date, heure)
+    Fonction permettant de convertir une unique chaîne de caractères avec date et heure au format "AAAA-MM-JJTHH:MM:SS+0n:00" en un seul tuple (date, heure)
     
     Parameters
     ----------
@@ -70,7 +70,7 @@ def dateVersDateEtHeures(dateHeures : str) -> tuple():
     
     '''
     
-    # Séparation et mise au format français de la date et de l'heure grâce aux fonction dateFr() et heurefr()
+    # Séparation et mise au format français de la date et de l'heure grâce aux fonctions dateFr() et heurefr()
     date = dateFr(dateHeures)
     heure  = heureFr(dateHeures)
     
@@ -89,7 +89,7 @@ def dateVersDateEtHeures(dateHeures : str) -> tuple():
     else:
         listeMois = [31,28,31,30,31,30,31,31,30,31,30,31]
 
-    # Modification si l'heure donner par heurefr() est supérieur à 24h
+    # Modification si l'heure donnée par heurefr() est supérieure à 24h
     if int(heure[:pointH]) >= 24:
         heure = str(int(heure[:pointH]) - 24) + heure[pointH:]
         
@@ -101,7 +101,7 @@ def dateVersDateEtHeures(dateHeures : str) -> tuple():
         
         
         if int(date[:tiretD]) > listeMois[int(date[3:5]) - 1]:
-            # Rajout de 1 moi à la date en gardant le format d'origine de la date
+            # Rajout de 1 mois à la date en gardant le format d'origine de la date
             if int(date[3:5]) >= 10 :
                 date = "01" + "-" + str(int(date[3:5]) + 1) + date[5:]
             else :
@@ -112,7 +112,7 @@ def dateVersDateEtHeures(dateHeures : str) -> tuple():
                 date = date[:3] + "0" + str(int(date[3:5]) - 12) +  "-" +str(int(date[6:]) + 1)
                 
                 
-    # Modification si l'heure donner par heurefr() est inférieur à 0h         
+    # Modification si l'heure donnée par heurefr() est inférieure à 0h         
     elif int(heure[:pointH]) < 0:
         heure = str(24 + int(heure[:pointH])) + heure[pointH:]
         # Diminution de 1 jour à la date
@@ -137,7 +137,7 @@ def dateFr(dateHeures : str) -> str:
     '''
     Objectif
     ---------- 
-    Fonction permettant de convertir une unique chaine de caractère avec date et heure au format "AAAA-MM-JJTHH:MM:SS+0n:00" et en donner seulement la date au format français
+    Fonction permettant de convertir une unique chaîne de caractères avec date et heure au format "AAAA-MM-JJTHH:MM:SS+0n:00" et en donner seulement la date au format français
 
     Parameters
     ----------
@@ -155,7 +155,7 @@ def dateFr(dateHeures : str) -> str:
     # Isolation de la date
     date = list(dateHeures[:10])
     
-    # Modification de la date au format francais
+    # Modification de la date au format français
     date[8:10],date[5:7],date[:4] = date[:4],date[5:7],date[8:10]
     date = ''.join(date)
     
@@ -166,7 +166,7 @@ def heureFr(dateHeures : str) -> str:
     '''
     Objectif
     ---------- 
-    Fonction permettant de convertir une unique chaine de caractère avec date et heure au format "AAAA-MM-JJTHH:MM:SS+0n:00" et en donner seulement l'heure au format français
+    Fonction permettant de convertir une unique chaîne de caractères avec date et heure au format "AAAA-MM-JJTHH:MM:SS+0n:00" et en donner seulement l'heure au format français
 
     Parameters
     ----------
