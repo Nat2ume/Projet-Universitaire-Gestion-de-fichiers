@@ -8,7 +8,7 @@ Projet Universitaire nous permettant de :
   -  Prendre conscience de l’intérêt de la programmation
 
 ## But du programme
-Le programme a pour dut de transformer un fichier json en un fichier csv avec différentes consignes tel que le choix des collones, faire attention au séparateur, aux accents, tranformer les dates en format français et extraire les heures de début et de fin.
+Le programme a pour dut de transformer un fichier json en un fichier csv avec différentes consignes tel que le choix des collones, faire attention au séparateur, aux accents, tranformer les dates en format français et extraire les heures de début et de fin et traduire le nom des clés pour avoir un document csv totalement en français.
 
 ## Création du csv
 Ne pas ouvrir en double clique sur le fichier csv créé qui pourrait vous ouvrir excel avec un fichier pas utilisable.
