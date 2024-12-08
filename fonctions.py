@@ -42,7 +42,7 @@ def estBissextile(annee : int) -> bool:
     
     '''
     
-    # Vérification de toutes les conditions pour que se soit une année bissextile
+    # Vérification de toutes les conditions pour que ce soit une année bissextile
     # Divisible par 4 et 100 ou alors divisible par 400
     if (annee % 4 == 0 and annee % 100 != 0) or (annee % 400 == 0):
         return True
