@@ -26,15 +26,15 @@ def estBissextile(annee : int) -> bool:
     '''
     Objectif
     ----------
-    Fonction qui permet de savoir si une année est bissextille
+    Fonction qui permet de savoir si une année est bissextile
 
     Parameters
     ----------
-    annee : int , une année dont on veut savoir si elle est bissextille
+    annee : int , une année dont on veut savoir si elle est bissextile
 
     Returns
     -------
-    bool , qui est True si l'année est bissextille False sinon
+    bool , qui est True si l'année est bissextile False sinon
     
     Exemple d'appel
     ----------
@@ -42,7 +42,7 @@ def estBissextile(annee : int) -> bool:
     
     '''
     
-    # Vérification de toutes les conditions pour que se soit une année bissextille
+    # Vérification de toutes les conditions pour que se soit une année bissextile
     # Divisible par 4 et 100 ou alors divisible par 400
     if (annee % 4 == 0 and annee % 100 != 0) or (annee % 400 == 0):
         return True
@@ -81,7 +81,7 @@ def dateVersDateEtHeures(dateHeures : str) -> tuple:
     
     
     anneeBi = estBissextile(int(date[8:]))
-    # Vérification si l'année donnée est bissextille
+    # Vérification si l'année donnée est bissextile
     # Si oui février a 29 jours
     if anneeBi:
         listeMois = [31,29,31,30,31,30,31,31,30,31,30,31]
