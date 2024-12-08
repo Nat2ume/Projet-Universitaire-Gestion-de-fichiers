@@ -49,7 +49,7 @@ def estBissextile(annee : int) -> bool:
     else:
         return False
     
-def dateVersDateEtHeures(dateHeures : str) -> tuple():
+def dateVersDateEtHeures(dateHeures : str) -> tuple:
     '''
     Objectif
     ---------- 
