@@ -2,6 +2,7 @@ from json import loads
 from csv import DictWriter
 import fonctions as f
 
+# Vérification que le nom du fichier actuel est bien celui du programme lancé
 if __name__ == "__main__":   
     try :
         j = open("que-faire-a-paris-.json") # Ouverture du fichier json 

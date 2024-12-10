@@ -7,6 +7,10 @@ Projet Universitaire nous permettant de :
   -  Comprendre les structures algorithmiques de base et leur contexte d’usage
   -  Prendre conscience de l’intérêt de la programmation
 
+## Projet réaliser par :
+  -  BENOIT Nathaël 
+  -  GASSE Armand-Valentin
+  
 ## But du programme
 Le programme a pour but de transformer un fichier json en un fichier csv avec différentes consignes telles que choisir des colonnes, faire attention aux séparateurs et aux accents, transformer les dates en format français et extraire les heures de début et de fin, et traduire le nom des clés pour avoir un document csv totalement en français.
 
