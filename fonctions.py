@@ -39,6 +39,7 @@ def estBissextile(annee : int) -> bool:
     Exemple d'appel
     ----------
     estBissextile(2020) renvoie True 
+    estBissextile(2019) renvoie False
     
     '''
     
@@ -197,3 +198,31 @@ def heureFr(dateHeures : str) -> str:
       
     return heure
 
+def binaireToFrancais(binaire : int)-> str:
+    '''
+    Objectif
+    ---------- 
+    Fonction permettant de convertir un caractère binaire 0 ou 1 en ce qui le représente
+
+    Parameters
+    ----------
+    binaire : int , au format 0, ou au format 1
+
+    Returns
+    -------
+    str , au format "Oui", ou au format "Non"
+    
+    Exemple d'appel
+    ----------
+    binaireToFrancais(1) renvoie "Oui"
+    binaireToFrancais(0) renvoie "Non"
+
+    '''
+    # Retourne Oui si la valeur dans binaire est 1
+    if binaire == 1:
+        return "Oui"
+    # Retourne Non si la valeur dans binaire est 0
+    elif binaire == 0:
+        return "Non"
+    # Retourne rien si il n'y a pas de valeurs ou si elle n'est pas binaire
+    return None

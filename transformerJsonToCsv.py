@@ -34,11 +34,15 @@ if __name__ == "__main__":
             for cle in dico:
                 # Prendre le cas où il y a des valeurs avec les clés
                 if dico[cle] is not None:
-                    # Modification pour les clés description et price_detail et enlever les traces HTML
+                    # Modification pour les clés description et price_detail pour enlever les traces HTML
                     if cle == "description" or cle == "price_detail":
                         dico[cle] = f.enleveTagsHtml(dico[cle])
+                    
+                    # Modification pour les clés pmr, blind et deaf pour remplacer le binaire en mot français
+                    if cle == "pmr" or cle == "blind" or cle == "deaf":
+                        dico[cle] = f.binaireToFrancais(dico[cle])
 
-                    # Modification des valeurs pour les clés afin d'avoir date et heure séparées 
+                    # Modification pour les clés date_start et date_end afin d'avoir date et heure séparées 
                     if cle == "date_start":
                         dateHeure = f.dateVersDateEtHeures(dico[cle])
                         dico["date_start"] = dateHeure[0]
@@ -54,11 +58,16 @@ if __name__ == "__main__":
             
         # Transformation en français de toutes les clés
         for dico in liste:
+            # Création d'un nouveau dictionnaire pour chaque dictionnaire pris dans la liste
             dicofr = {}
+            # Indice pour parcourire la liste française
             i = 0
+            # Parcours des clés dans le dico en anglais
             for cle in dico:
+                # Création de chaque éléments dans le dictionnaire français avec la clé en français et la valeur qui est celle du dictionnaire en anglais
                 dicofr[listeordonneeFr[i]] = dico[cle]
                 i += 1
+            # Ajout de chaque nouveau dictionnaires dans une liste
             listefr.append(dicofr)
         
         # Ouverture ou création de fichier csv au nom voulu en écriture au format texte avec l'encodage utf-8
