@@ -41,7 +41,7 @@ if __name__ == "__main__":
                     # Modification pour les clés pmr, blind et deaf pour remplacer le binaire en mot français
                     if cle == "pmr" or cle == "blind" or cle == "deaf":
                         dico[cle] = f.binaireToFrancais(dico[cle])
-
+                        
                     # Modification pour les clés date_start et date_end afin d'avoir les dates et les heures séparées 
                     if cle == "date_start":
                         dateHeure = f.dateVersDateEtHeures(dico[cle])
@@ -67,7 +67,7 @@ if __name__ == "__main__":
                 # Création de chaque élément dans le dictionnaire français avec la clé en français et la valeur qui est celle du dictionnaire en anglais
                 dicofr[listeordonneeFr[i]] = dico[cle]
                 i += 1
-            # Ajout de chaque nouveau dictionnaire dans une liste
+            # Ajout de chaque nouveau dictionnaires dans une liste
             listefr.append(dicofr)
         
         # Ouverture ou création de fichier csv au nom voulu en écriture au format texte avec l'encodage utf-8
