@@ -2,10 +2,11 @@ from json import loads
 from csv import DictWriter
 import fonctions as f
 
+# Vérification que le nom du fichier actuel est bien celui du programme lancé
 if __name__ == "__main__":   
     try :
         j = open("que-faire-a-paris-.json") # Ouverture du fichier json 
-        liste = loads(j.read()) # Création de liste de dictionnaire a partir du fichier json
+        liste = loads(j.read()) # Création d'une liste de dictionnaires à partir du fichier json
         # Liste des clés qui ne sont pas voulues dans le csv mais qui sont dans la liste
         listeNonVoulu = ['occurrences','date_description','cover_url','cover_alt','cover_credit','tags', 'contact_facebook', 'contact_twitter', 'price_type', 'access_link', 'access_link_text', 'updated_at', 'image_couverture', 'programs', 'address_url', 'address_url_text','address_text','title_event','audience','childrens','group','locale']
         # Liste de l'ordre voulu dans les dictionnaires
@@ -33,11 +34,15 @@ if __name__ == "__main__":
             for cle in dico:
                 # Prendre le cas où il y a des valeurs avec les clés
                 if dico[cle] is not None:
-                    # Modification pour les clés description et price_detail et enlever les traces HTML
+                    # Modification pour les clés description et price_detail pour enlever les traces HTML
                     if cle == "description" or cle == "price_detail":
                         dico[cle] = f.enleveTagsHtml(dico[cle])
+                    
+                    # Modification pour les clés pmr, blind et deaf pour remplacer le binaire en mot français
+                    if cle == "pmr" or cle == "blind" or cle == "deaf":
+                        dico[cle] = f.binaireToFrancais(dico[cle])
 
-                    # Modification des valeurs pour les clés afin d'avoir date et heure séparées 
+                    # Modification pour les clés date_start et date_end afin d'avoir les dates et les heures séparées 
                     if cle == "date_start":
                         dateHeure = f.dateVersDateEtHeures(dico[cle])
                         dico["date_start"] = dateHeure[0]
@@ -51,13 +56,18 @@ if __name__ == "__main__":
         for i in range(len(liste)):
             liste[i] = {cle: liste[i][cle] for cle in listeOrdonnee}
             
-        # Transformation en français de toutes les clés
+        # Traduction en français de toutes les clés
         for dico in liste:
+            # Création d'un nouveau dictionnaire pour chaque dictionnaire pris dans la liste
             dicofr = {}
+            # Indice pour parcourir la liste française
             i = 0
+            # Parcours des clés dans le dico en anglais
             for cle in dico:
+                # Création de chaque élément dans le dictionnaire français avec la clé en français et la valeur qui est celle du dictionnaire en anglais
                 dicofr[listeordonneeFr[i]] = dico[cle]
                 i += 1
+            # Ajout de chaque nouveau dictionnaire dans une liste
             listefr.append(dicofr)
         
         # Ouverture ou création de fichier csv au nom voulu en écriture au format texte avec l'encodage utf-8
@@ -75,8 +85,6 @@ if __name__ == "__main__":
         fichier.close()
         j.close()
         
-    # Si le fichier json donné au début n'est pas présent dans le dossier
+    # Affiche un message à l'utilisateur si le fichier json n'est pas présent dans le dossier
     except FileNotFoundError: 
         print("Fichier introuvable")
-
-        
